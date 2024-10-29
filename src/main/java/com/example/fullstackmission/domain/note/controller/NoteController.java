@@ -34,4 +34,10 @@ public class NoteController {
         noteService.modify(id, title, content);
         return "redirect:/notes/%d".formatted(id);
     }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        noteService.delete(id);
+        return "redirect:/";
+    }
 }

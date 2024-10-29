@@ -42,4 +42,8 @@ public class NoteService {
         note.setContent(content);
 //        noteRepository.save(note);
     }
+
+    public void delete(long id) {
+        noteRepository.deleteById(id);
+    }
 }
