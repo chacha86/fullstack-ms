@@ -14,17 +14,24 @@
             <ul>
                 <li th:each="note : ${noteList}" th:text="${note.title}"></li>
             </ul>
-            <button>추가</button>
+            <form action="/write" method="post">
+                <input class="btn btn-sm" type="submit" value="추가" />
+            </form>
         </div>
         <div class="right bg-blue-300 w-[85%]">
             <form class="flex flex-col gap-2 p-3">
                 <input type="text">
-                <textarea cols="30" rows="10"></textarea>
-                <button>수정</button>
-                <button>삭제</button>
+                <textarea rows="10"></textarea>
+                <button class="btn btn-sm">수정</button>
+                <button class="btn btn-sm">삭제</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    function addNote() {
+
+    }
+</script>
 </body>
 </html>

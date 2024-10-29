@@ -12,20 +12,15 @@ import java.util.List;
 public class MainService {
     private final NoteService noteService;
 
-    public Note writeDefaultNote() {
-        Note newNote = Note.builder()
-                .title("new title..")
-                .content("")
-                .build();
-
-        return noteService.write(newNote);
-    }
     public void init() {
         if (noteService.count() == 0) {
             writeDefaultNote();
         }
     }
 
+    public Note writeDefaultNote() {
+        return noteService.writeDefault();
+    }
     public List<Note> getNoteList() {
         return noteService.getList();
     }

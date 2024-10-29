@@ -13,7 +13,12 @@ public class NoteService {
 
     private final NoteRepository noteRepository;
 
-    public Note write(Note newNote) {
+    public Note writeDefault() {
+        Note newNote = Note.builder()
+                .title("new title..")
+                .content("")
+                .build();
+
         return noteRepository.save(newNote);
     }
 
