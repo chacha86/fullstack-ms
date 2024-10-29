@@ -2,9 +2,30 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>main</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<h1>main</h1>
+<div>
+    <div class="logo bg-green-300 h-[5vh]">logo</div>
+    <div class="flex h-[95vh]">
+        <div class="left bg-red-300 flex-grow-[1]">
+            <ul>
+                <li>item1</li>
+                <li>item2</li>
+                <li>item3</li>
+            </ul>
+        </div>
+        <div class="right bg-blue-300 flex-grow-[5]">
+            <form class="flex flex-col gap-2 p-3">
+                <input type="text">
+                <textarea cols="30" rows="10"></textarea>
+                <button>수정</button>
+                <button>삭제</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
