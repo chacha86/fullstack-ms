@@ -10,14 +10,13 @@
 <div>
     <div class="logo bg-green-300 h-[5vh]">logo</div>
     <div class="flex h-[95vh]">
-        <div class="left bg-red-300 flex-grow-[1]">
+        <div class="left flex flex-col items-center bg-red-300 w-[15%]">
             <ul>
-                <li>item1</li>
-                <li>item2</li>
-                <li>item3</li>
+                <li th:each="note : ${noteList}" th:text="${note.title}"></li>
             </ul>
+            <button>추가</button>
         </div>
-        <div class="right bg-blue-300 flex-grow-[5]">
+        <div class="right bg-blue-300 w-[85%]">
             <form class="flex flex-col gap-2 p-3">
                 <input type="text">
                 <textarea cols="30" rows="10"></textarea>

@@ -1,17 +1,30 @@
 package com.example.fullstackmission;
 
+import com.example.fullstackmission.domain.note.entity.Note;
 import com.example.fullstackmission.domain.note.service.NoteService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class MainController {
-    private final NoteService noteService;
+    private final MainService mainService;
+
+    @PostConstruct
+    public void init() {
+        mainService.init();
+    }
 
     @RequestMapping("/")
-    public String main() {
+    public String main(Model model) {
+        List<Note> noteList = mainService.getNoteList();
+        model.addAttribute("noteList", noteList);
+
         return "main";
     }
 }
