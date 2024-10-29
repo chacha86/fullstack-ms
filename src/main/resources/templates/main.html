@@ -9,10 +9,12 @@
 <body>
 <div>
     <div class="logo bg-green-300 h-[5vh]">logo</div>
-    <div class="flex h-[95vh]">
+    <div class="flex h-[95vh] p-1">
         <div class="left flex flex-col items-center bg-red-300 w-[15%]">
             <ul>
-                <li th:each="note : ${noteList}" th:text="${note.title}"></li>
+                <li th:each="note : ${noteList}">
+                    <a th:href="@{|/notes/${note.id}|}" th:text="${note.title}"></a>
+                </li>
             </ul>
             <form action="/write" method="post">
                 <input class="btn btn-sm" type="submit" value="추가" />
@@ -20,8 +22,8 @@
         </div>
         <div class="right bg-blue-300 w-[85%]">
             <form class="flex flex-col gap-2 p-3">
-                <input type="text">
-                <textarea rows="10"></textarea>
+                <input type="text" th:value="${note.getTitle()}">
+                <textarea rows="10" th:text="${note.getContent()}"></textarea>
                 <button class="btn btn-sm">수정</button>
                 <button class="btn btn-sm">삭제</button>
             </form>

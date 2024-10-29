@@ -29,4 +29,8 @@ public class NoteService {
     public List<Note> getList() {
         return noteRepository.findAll();
     }
+
+    public Note getOne(Long id) {
+        return noteRepository.findById(id).orElseThrow();
+    }
 }

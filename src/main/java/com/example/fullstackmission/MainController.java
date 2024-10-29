@@ -29,9 +29,11 @@ public class MainController {
     }
     @GetMapping("/")
     public String main(Model model) {
-        List<Note> noteList = mainService.getNoteList();
-        model.addAttribute("noteList", noteList);
 
-        return "main";
+        List<Note> noteList = mainService.getNoteList();
+        assert !noteList.isEmpty();
+
+        Note first = noteList.getFirst();
+        return "redirect:/notes/%d".formatted(first.getId());
     }
 }
