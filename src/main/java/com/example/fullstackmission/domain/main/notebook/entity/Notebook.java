@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -25,5 +26,10 @@ public class Notebook {
     private String name;
 
     @OneToMany(mappedBy = "parent")
-    private List<Note> noteList;
+    private List<Note> noteList = new ArrayList<>();
+
+    public void addNote(Note note) {
+        noteList.add(note);
+        note.setParent(this);
+    }
 }

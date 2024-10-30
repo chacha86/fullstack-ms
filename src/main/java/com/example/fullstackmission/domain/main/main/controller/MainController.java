@@ -2,6 +2,7 @@ package com.example.fullstackmission.domain.main.main.controller;
 
 import com.example.fullstackmission.domain.main.main.service.MainService;
 import com.example.fullstackmission.domain.main.note.entity.Note;
+import com.example.fullstackmission.domain.main.notebook.entity.Notebook;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,10 +25,14 @@ public class MainController {
     @GetMapping("/")
     public String main(Model model) {
 
-        List<Note> noteList = mainService.getNoteList();
-        assert !noteList.isEmpty();
+        List<Notebook> notebookList = mainService.getNotebookList();
+        assert !notebookList.isEmpty();
 
-        Note first = noteList.getFirst();
-        return "redirect:/notes/%d".formatted(first.getId());
+        Notebook firstBook = notebookList.getFirst();
+        List<Note> noteList = firstBook.getNoteList();
+        assert !notebookList.isEmpty();
+
+        Note firstNote = noteList.getFirst();
+        return "redirect:/books/%d/notes/%d".formatted(firstBook.getId(), firstNote.getId());
     }
 }

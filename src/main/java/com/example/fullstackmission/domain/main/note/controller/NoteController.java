@@ -2,6 +2,7 @@ package com.example.fullstackmission.domain.main.note.controller;
 
 import com.example.fullstackmission.domain.main.note.entity.Note;
 import com.example.fullstackmission.domain.main.note.service.NoteService;
+import com.example.fullstackmission.domain.main.notebook.entity.Notebook;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/notes")
+@RequestMapping("/books/{bookId}/notes")
 public class NoteController {
     private final NoteService noteService;
 
@@ -24,9 +25,9 @@ public class NoteController {
         return "redirect:/notes/%d".formatted(note.getId());
     }
 
-    @GetMapping("/{id}")
-    public String info(@PathVariable Long id, Model model) {
-        Note note = noteService.getOne(id);
+    @GetMapping("/{noteId}")
+    public String base(@PathVariable long bookId, @PathVariable long noteId, Model model) {
+        Note note = noteService.getOne(noteId);
         List<Note> noteList = noteService.getList();
 
         model.addAttribute("selectedNote", note);
