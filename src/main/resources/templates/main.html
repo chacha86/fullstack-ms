@@ -12,7 +12,7 @@
     <div class="flex h-[95vh] p-1">
         <div class="left flex flex-col items-center justify-between bg-red-300 w-[15%]">
             <ul class="w-[100%] overflow-auto">
-                <li th:each="note : ${noteList}">
+                <li th:class="${selectedNote.id == note.id ? 'bg-blue-600' : ''}" th:each="note : ${noteList}">
                     <a class="block p-2" th:href="@{|/notes/${note.id}|}" th:text="${note.title}"></a>
                 </li>
             </ul>
@@ -21,11 +21,11 @@
             </form>
         </div>
         <div class="right bg-blue-300 w-[85%] p-3">
-            <form class="flex flex-col gap-2" th:action="@{|/notes/modify/${note.id}|}" method="post" id="detail-form">
-                <input class="p-2" type="text" name="title" th:value="${note.getTitle()}">
-                <textarea class="p-2" rows="10" name="content" th:text="${note.getContent()}"></textarea>
+            <form class="flex flex-col gap-2" th:action="@{|/notes/modify/${selectedNote.id}|}" method="post" id="detail-form">
+                <input class="p-2" type="text" name="title" th:value="${selectedNote.getTitle()}">
+                <textarea class="p-2" rows="10" name="content" th:text="${selectedNote.getContent()}"></textarea>
             </form>
-            <form th:action="@{|/notes/delete/${note.id}|}" method="post" id="delete-form">
+            <form th:action="@{|/notes/delete/${selectedNote.id}|}" method="post" id="delete-form">
             </form>
             <div class="pt-[10px]">
                 <input type="button" value="수정" class="btn btn-sm btn-success" onclick="updateNote();">

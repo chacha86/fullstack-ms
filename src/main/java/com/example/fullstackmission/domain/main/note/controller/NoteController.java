@@ -29,7 +29,7 @@ public class NoteController {
         Note note = noteService.getOne(id);
         List<Note> noteList = noteService.getList();
 
-        model.addAttribute("note", note);
+        model.addAttribute("selectedNote", note);
         model.addAttribute("noteList", noteList);
 
         return "main";
