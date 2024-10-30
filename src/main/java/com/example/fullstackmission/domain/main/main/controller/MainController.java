@@ -1,14 +1,13 @@
-package com.example.fullstackmission;
+package com.example.fullstackmission.domain.main.main.controller;
 
-import com.example.fullstackmission.domain.note.entity.Note;
-import com.example.fullstackmission.domain.note.service.NoteService;
+import com.example.fullstackmission.domain.main.main.service.MainService;
+import com.example.fullstackmission.domain.main.note.entity.Note;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -22,11 +21,6 @@ public class MainController {
         mainService.init();
     }
 
-    @PostMapping("/write")
-    public String write() {
-        mainService.writeDefaultNote();
-        return "redirect:/";
-    }
     @GetMapping("/")
     public String main(Model model) {
 

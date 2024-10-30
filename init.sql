@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS mission;
+CREATE DATABASE mission;
+USE mission;

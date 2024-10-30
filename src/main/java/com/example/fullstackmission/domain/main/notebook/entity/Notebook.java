@@ -1,9 +1,13 @@
-package com.example.fullstackmission.domain.note.entity;
+package com.example.fullstackmission.domain.main.notebook.entity;
 
+import com.example.fullstackmission.domain.main.note.entity.Note;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.*;
+
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -13,11 +17,13 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Note {
+public class Notebook {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private long id;
-    private String title;
-    private String content;
+    private String name;
+
+    @OneToMany(mappedBy = "parent")
+    private List<Note> noteList;
 }

@@ -1,7 +1,7 @@
-package com.example.fullstackmission.domain.note.controller;
+package com.example.fullstackmission.domain.main.note.controller;
 
-import com.example.fullstackmission.domain.note.entity.Note;
-import com.example.fullstackmission.domain.note.service.NoteService;
+import com.example.fullstackmission.domain.main.note.entity.Note;
+import com.example.fullstackmission.domain.main.note.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +17,12 @@ import java.util.List;
 @RequestMapping("/notes")
 public class NoteController {
     private final NoteService noteService;
+
+    @PostMapping("/write")
+    public String write() {
+        Note note = noteService.writeDefault();
+        return "redirect:/notes/%d".formatted(note.getId());
+    }
 
     @GetMapping("/{id}")
     public String info(@PathVariable Long id, Model model) {

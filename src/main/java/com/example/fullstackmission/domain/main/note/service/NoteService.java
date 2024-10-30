@@ -1,7 +1,7 @@
-package com.example.fullstackmission.domain.note.service;
+package com.example.fullstackmission.domain.main.note.service;
 
-import com.example.fullstackmission.domain.note.entity.Note;
-import com.example.fullstackmission.domain.note.repository.NoteRepository;
+import com.example.fullstackmission.domain.main.note.repository.NoteRepository;
+import com.example.fullstackmission.domain.main.note.entity.Note;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
