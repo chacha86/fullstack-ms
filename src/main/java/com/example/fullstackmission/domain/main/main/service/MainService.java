@@ -4,6 +4,7 @@ import com.example.fullstackmission.domain.main.note.entity.Note;
 import com.example.fullstackmission.domain.main.note.service.NoteService;
 import com.example.fullstackmission.domain.main.notebook.entity.Notebook;
 import com.example.fullstackmission.domain.main.notebook.service.NotebookService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,30 +16,54 @@ public class MainService {
     private final NoteService noteService;
     private final NotebookService notebookService;
 
+    @Transactional
     public void init() {
 
-        if(notebookService.count() == 0) {
+        if (notebookService.count() == 0) {
             writeDefaultNotebook();
         }
     }
 
-    public Note writeDefaultNote() {
-        return noteService.writeDefault();
-    }
-
+    @Transactional
     public Notebook writeDefaultNotebook() {
         Notebook notebook = notebookService.writeDefault();
-        Note note = noteService.writeDefault();
-
+        Note note = writeDefaultNote(notebook.getId());
         notebook.addNote(note);
+
         return notebook;
+    }
+
+    public List<Notebook> getNotebookList() {
+        return notebookService.getList();
+    }
+
+    public Notebook getNotebookById(long bookId) {
+        return notebookService.getOne(bookId);
+    }
+
+    @Transactional
+    public Note writeDefaultNote(long bookId) {
+        Notebook notebook = notebookService.getOne(bookId);
+        Note note = noteService.writeDefault();
+        notebook.addNote(note);
+
+        return note;
+    }
+
+    public void modifyNote(Long noteId, String title, String content) {
+        noteService.modify(noteId, title, content);
+    }
+
+    public void deleteNote(long noteId) {
+        noteService.delete(noteId);
+    }
+
+    public Note getNoteById(long noteId) {
+        return noteService.getOne(noteId);
     }
 
     public List<Note> getNoteList() {
         return noteService.getList();
     }
 
-    public List<Notebook> getNotebookList() {
-        return notebookService.getList();
-    }
 }

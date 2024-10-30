@@ -30,7 +30,7 @@ public class MainController {
 
         Notebook firstBook = notebookList.getFirst();
         List<Note> noteList = firstBook.getNoteList();
-        assert !notebookList.isEmpty();
+        assert !noteList.isEmpty();
 
         Note firstNote = noteList.getFirst();
         return "redirect:/books/%d/notes/%d".formatted(firstBook.getId(), firstNote.getId());

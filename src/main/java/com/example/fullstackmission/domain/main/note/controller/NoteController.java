@@ -1,5 +1,6 @@
 package com.example.fullstackmission.domain.main.note.controller;
 
+import com.example.fullstackmission.domain.main.main.service.MainService;
 import com.example.fullstackmission.domain.main.note.entity.Note;
 import com.example.fullstackmission.domain.main.note.service.NoteService;
 import com.example.fullstackmission.domain.main.notebook.entity.Notebook;
@@ -17,34 +18,48 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/books/{bookId}/notes")
 public class NoteController {
-    private final NoteService noteService;
-
+//    private final NoteService noteService;
+    private final MainService mainService;
     @PostMapping("/write")
-    public String write() {
-        Note note = noteService.writeDefault();
-        return "redirect:/notes/%d".formatted(note.getId());
+    public String write(@PathVariable long bookId) {
+        Note note = mainService.writeDefaultNote(bookId);
+        return "redirect:/books/%d/notes/%d".formatted(bookId, note.getId());
+    }
+
+    @GetMapping("")
+    public String list(@PathVariable long bookId) {
+        Notebook notebook = mainService.getNotebookById(bookId);
+        List<Note> noteList = notebook.getNoteList();
+        assert !noteList.isEmpty();
+
+        return "redirect:/books/%d/notes/%d".formatted(bookId, noteList.getFirst().getId());
     }
 
     @GetMapping("/{noteId}")
     public String base(@PathVariable long bookId, @PathVariable long noteId, Model model) {
-        Note note = noteService.getOne(noteId);
-        List<Note> noteList = noteService.getList();
+        Notebook notebook = mainService.getNotebookById(bookId);
+        List<Notebook> notebookList = mainService.getNotebookList();
+
+        Note note = mainService.getNoteById(noteId);
+        List<Note> noteList = notebook.getNoteList();
 
         model.addAttribute("selectedNote", note);
         model.addAttribute("noteList", noteList);
+        model.addAttribute("selectedNotebook", notebook);
+        model.addAttribute("notebookList", notebookList);
 
         return "main";
     }
 
-    @PostMapping("/modify/{id}")
-    public String modify(@PathVariable Long id, String title, String content) {
-        noteService.modify(id, title, content);
-        return "redirect:/notes/%d".formatted(id);
+    @PostMapping("/modify/{noteId}")
+    public String modify(@PathVariable Long bookId, @PathVariable Long noteId, String title, String content) {
+        mainService.modifyNote(noteId, title, content);
+        return "redirect:/books/%d/notes/%d".formatted(bookId, noteId);
     }
 
-    @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        noteService.delete(id);
-        return "redirect:/";
+    @PostMapping("/delete/{noteId}")
+    public String delete(@PathVariable long bookId, @PathVariable long noteId) {
+        mainService.deleteNote(noteId);
+        return "redirect:/books/%d/notes".formatted(bookId);
     }
 }

@@ -10,13 +10,23 @@
 <div>
     <div class="logo bg-green-300 h-[5vh]"><a href="/">logo</a></div>
     <div class="flex h-[95vh] p-1">
+        <div class="left flex flex-col items-center justify-between bg-red-500 w-[15%]">
+            <ul class="w-[100%] overflow-auto">
+                <li th:class="${selectedNotebook.id == notebook.id ? 'bg-blue-600' : ''}" th:each="notebook : ${notebookList}">
+                    <a class="block p-2" th:href="@{|/books/${notebook.id}/notes|}" th:text="${notebook.name}"></a>
+                </li>
+            </ul>
+            <form th:action="@{|/books/write|}" method="post">
+                <input class="btn btn-sm btn-info" type="submit" value="추가"/>
+            </form>
+        </div>
         <div class="left flex flex-col items-center justify-between bg-red-300 w-[15%]">
             <ul class="w-[100%] overflow-auto">
                 <li th:class="${selectedNote.id == note.id ? 'bg-blue-600' : ''}" th:each="note : ${noteList}">
-                    <a class="block p-2" th:href="@{|/notes/${note.id}|}" th:text="${note.title}"></a>
+                    <a class="block p-2" th:href="@{|/books/${note.parent.id}/notes/${note.id}|}" th:text="${note.title}"></a>
                 </li>
             </ul>
-            <form action="/notes/write" method="post">
+            <form th:action="@{|/books/${selectedNotebook.id}/notes/write|}" method="post">
                 <input class="btn btn-sm btn-info" type="submit" value="추가"/>
             </form>
         </div>

@@ -13,7 +13,6 @@ import java.util.List;
 public class NoteService {
 
     private final NoteRepository noteRepository;
-
     public Note writeDefault() {
         Note newNote = Note.builder()
                 .title("new title..")
@@ -46,4 +45,5 @@ public class NoteService {
     public void delete(long id) {
         noteRepository.deleteById(id);
     }
+
 }
