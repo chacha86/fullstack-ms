@@ -1,7 +1,8 @@
-package com.example.fullstackmission.domain.main.note.service;
+package com.example.fullstackmission.domain.main.notebook.note.service;
 
-import com.example.fullstackmission.domain.main.note.repository.NoteRepository;
-import com.example.fullstackmission.domain.main.note.entity.Note;
+import com.example.fullstackmission.domain.main.notebook.entity.Notebook;
+import com.example.fullstackmission.domain.main.notebook.note.repository.NoteRepository;
+import com.example.fullstackmission.domain.main.notebook.note.entity.Note;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,10 +36,12 @@ public class NoteService {
     }
 
     @Transactional
-    public void modify(Long id, String title, String content) {
+    public Note modify(Long id, String title, String content) {
         Note note = getOne(id);
         note.setTitle(title);
         note.setContent(content);
+
+        return note;
 //        noteRepository.save(note);
     }
 

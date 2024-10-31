@@ -1,6 +1,6 @@
 package com.example.fullstackmission.domain.main.notebook.entity;
 
-import com.example.fullstackmission.domain.main.note.entity.Note;
+import com.example.fullstackmission.domain.main.notebook.note.entity.Note;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

@@ -1,7 +1,7 @@
-package com.example.fullstackmission.domain.main.main.service;
+package com.example.fullstackmission.domain.main.notebook.coordinator;
 
-import com.example.fullstackmission.domain.main.note.entity.Note;
-import com.example.fullstackmission.domain.main.note.service.NoteService;
+import com.example.fullstackmission.domain.main.notebook.note.entity.Note;
+import com.example.fullstackmission.domain.main.notebook.note.service.NoteService;
 import com.example.fullstackmission.domain.main.notebook.entity.Notebook;
 import com.example.fullstackmission.domain.main.notebook.service.NotebookService;
 import jakarta.transaction.Transactional;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MainService {
+public class NoteAndBookCoordinator {
     private final NoteService noteService;
     private final NotebookService notebookService;
 
@@ -23,7 +23,6 @@ public class MainService {
             writeDefaultNotebook();
         }
     }
-
     @Transactional
     public Notebook writeDefaultNotebook() {
         Notebook notebook = notebookService.writeDefault();
@@ -66,4 +65,11 @@ public class MainService {
         return noteService.getList();
     }
 
+    public Notebook getFirstNotebook() {
+        return notebookService.getList().getFirst();
+    }
+
+    public Note getFirstNote(long bookId) {
+        return notebookService.getOne(bookId).getNoteList().getFirst();
+    }
 }

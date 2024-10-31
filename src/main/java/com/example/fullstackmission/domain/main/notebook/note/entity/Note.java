@@ -1,4 +1,4 @@
-package com.example.fullstackmission.domain.main.note.entity;
+package com.example.fullstackmission.domain.main.notebook.note.entity;
 
 import com.example.fullstackmission.domain.main.notebook.entity.Notebook;
 import jakarta.persistence.Entity;
