@@ -26,4 +26,8 @@ public class NotebookService {
     public List<Notebook> getList() {
         return notebookRepository.findAll();
     }
+
+    public Notebook getOne(long bookId) {
+        return notebookRepository.findById(bookId).orElseThrow();
+    }
 }

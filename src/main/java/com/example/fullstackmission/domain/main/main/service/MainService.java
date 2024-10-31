@@ -4,6 +4,7 @@ import com.example.fullstackmission.domain.main.note.entity.Note;
 import com.example.fullstackmission.domain.main.note.service.NoteService;
 import com.example.fullstackmission.domain.main.notebook.entity.Notebook;
 import com.example.fullstackmission.domain.main.notebook.service.NotebookService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class MainService {
     private final NoteService noteService;
     private final NotebookService notebookService;
 
+    @Transactional
     public void init() {
 
         if(notebookService.count() == 0) {
@@ -40,5 +42,13 @@ public class MainService {
 
     public List<Notebook> getNotebookList() {
         return notebookService.getList();
+    }
+
+    public Notebook getNotebook(long bookId) {
+        return notebookService.getOne(bookId);
+    }
+
+    public Note getNote(long noteId) {
+        return noteService.getOne(noteId);
     }
 }

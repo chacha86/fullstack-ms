@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/books/{bookId}/notes")
+@RequestMapping("/notes")
 public class NoteController {
     private final NoteService noteService;
 

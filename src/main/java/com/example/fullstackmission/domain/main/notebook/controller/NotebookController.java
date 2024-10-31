@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.fullstackmission.domain.main.notebook.service.NotebookService;
 
@@ -16,14 +17,10 @@ import java.util.List;
 @RequestMapping("/books")
 public class NotebookController {
     private final NotebookService notebookService;
-//    @GetMapping("/{id}")
-//    public String base(@PathVariable Long id, Model model) {
-//        Note note = notebookService.getOne(id);
-//        List<Note> noteList = notebookService.getList();
-//
-//        model.addAttribute("selectedNote", note);
-//        model.addAttribute("noteList", noteList);
-//
-//        return "main";
-//    }
+
+    @PostMapping("/write")
+    public String write() {
+        notebookService.writeDefault();
+        return "redirect:/";
+    }
 }
